@@ -1,2 +1,2 @@
 # Test_bat
-Test task with bat files
+Start "Start_teat_program.bat"
