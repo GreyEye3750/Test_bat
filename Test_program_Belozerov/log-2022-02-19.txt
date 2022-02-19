@@ -1,0 +1,9 @@
+ 
+ 
+--------------------------------- 
+22:31:12,31 ping.exe is not running   
+22:31:12,33 ipconfig.exe is not running   
+22:31:17,21 ping.exe is not running   
+22:31:17,22 ipconfig.exe is not running   
+----------show ip result--------- 
+-----------ping result----------- 
