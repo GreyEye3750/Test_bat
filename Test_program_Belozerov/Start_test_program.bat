@@ -32,34 +32,29 @@ echo --------------------------------- >> %~dp0/log-%date:~6,4%-%date:~3,2%-%dat
 
 cd /d "%~dp0" && (
 	
-	start Call_ip.bat
 	start /min Call_ping.bat
+	start /min Call_ip.bat
+	
 	
 	(
 	for /l %%x in (1 , 1, %cicle_count%) do (
 		Timeout %inner_count% /NOBREAK
 		call Checkping.bat %~dp0/list-%date:~6,4%-%date:~3,2%-%date:~0,2%.txt  %~dp0/log-%date:~6,4%-%date:~3,2%-%date:~0,2%.txt )
+	echo.
+	call Call_output.bat
+	goto retry
 
-	find /I %~dp0/list-%date:~6,4%-%date:~3,2%-%date:~0,2%.txt "ping.exe">nul
-
-	if "%ERRORLEVEL%"=="0" (
-	
-	taskkill /F /IM "ping.exe">nul
-	echo %TIME% ping.exe executed >> %~dp0/log-%date:~6,4%-%date:~3,2%-%date:~0,2%.txt
-	echo %TIME% ping.exe executed 
-	)
-
-	echo ----------show ip result--------- >> %~dp0/log-%date:~6,4%-%date:~3,2%-%date:~0,2%.txt
-	for /f "tokens=*" %%i in (ip.txt) do (
-	echo %%i>> %~dp0/log-%date:~6,4%-%date:~3,2%-%date:~0,2%.txt
-	)
-
-	echo -----------ping result----------- >> %~dp0/log-%date:~6,4%-%date:~3,2%-%date:~0,2%.txt
-	for /f "tokens=*" %%i in (list_ping.txt) do (
-	echo %%i>> %~dp0/log-%date:~6,4%-%date:~3,2%-%date:~0,2%.txt
-	)
 	)
 )
+:retry
+set /p retry_or_end="Restart the program, Y/NO?: "
+
+if /I "%retry_or_end%"=="Y" goto start_pr
+if /I "%retry_or_end%"=="NO" goto end_prog 
+
+echo Error! Input Y or NO please
+goto retry
+
 goto end_prog
 
 :end_prog
@@ -69,6 +64,5 @@ endlocal
 del ip.txt
 del list_ping.txt
 del "%~dp0/list-%date:~6,4%-%date:~3,2%-%date:~0,2%.txt"
-pause
 @chcp 866 >nul
 exit
