@@ -1,6 +1,7 @@
 #!/bin/bash
 echo Starting...
 #./ping1.sh & ./ip1.sh
+ps axu > file.txt
 #---------------
 echo --------------------------------- >> $(date +%y-%m-%d)-list.txt
 echo ///////////////////////////////// >> $(date +%y-%m-%d)-list.txt
@@ -36,20 +37,19 @@ for ((i=0; i<$cicle_count; i++))
 do
 {
 sleep $inner_count
-ps axu > file.txt
-if grep -iq 'ping.exe' file.txt; then
+if grep -iq 'ping' file.txt; then
     echo ---------------------------------
-    echo $(date +%H-%M-%S): ping.exe is running
+    echo $(date +%H-%M-%S): ping is running
     echo ---------------------------------
     echo --------------------------------- >> $(date +%y-%m-%d)-list.txt
-    echo $(date +%H-%M-%S): ping.exe is running >> $(date +%y-%m-%d)-list.txt
+    echo $(date +%H-%M-%S): ping is running >> $(date +%y-%m-%d)-list.txt
     echo --------------------------------- >> $(date +%y-%m-%d)-list.txt
 else
     echo ---------------------------------
-    echo $(date +%H-%M-%S): ping.exe is not running
+    echo $(date +%H-%M-%S): ping is not running
     echo ---------------------------------
     echo --------------------------------- >> $(date +%y-%m-%d)-list.txt
-    echo $(date +%H-%M-%S): ping.exe is not running >> $(date +%y-%m-%d)-list.txt
+    echo $(date +%H-%M-%S): ping is not running >> $(date +%y-%m-%d)-list.txt
     echo --------------------------------- >> $(date +%y-%m-%d)-list.txt
 fi
 if grep -iq 'ipconfig.exe' file.txt; then

@@ -4,7 +4,7 @@ str_N="N"
 flag_retry=0
 while [[ $flag_retry == 0 ]]
 do   
-    ping.exe google.ru -t > ping.txt & ipconfig.exe > ip.txt
+    ping google.ru > ping.txt & ipconfig.exe > ip.txt
     ./Checking.sh
     ./Output.sh
     rm ping.txt
